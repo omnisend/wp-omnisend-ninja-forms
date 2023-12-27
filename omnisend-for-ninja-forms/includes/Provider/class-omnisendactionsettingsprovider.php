@@ -90,7 +90,7 @@ class OmnisendActionSettingsProvider {
 			$settings[ $key ] = array(
 				'name'    => $key,
 				'type'    => 'select',
-				'label'   => esc_html__( $label, 'ninja-forms' ),
+				'label'   => $label,
 				'options' => $options,
 				'width'   => 'one-half',
 				'group'   => 'advanced',
@@ -146,7 +146,7 @@ class OmnisendActionSettingsProvider {
 	 */
 	private function get_heading_settings(): array {
 		return array(
-			'weclome_email_block'          => array(
+			'weclome_email_block'                   => array(
 				'name'           => 'weclome_email_block',
 				'type'           => 'html',
 				'group'          => 'advanced',
@@ -155,7 +155,7 @@ class OmnisendActionSettingsProvider {
 				'width'          => 'full',
 				'use_merge_tags' => true,
 			),
-			'message'                      => array(
+			'message'                               => array(
 				'name'           => 'message',
 				'type'           => 'html',
 				'group'          => 'advanced',
@@ -164,14 +164,14 @@ class OmnisendActionSettingsProvider {
 				'width'          => 'full',
 				'use_merge_tags' => true,
 			),
-			self::SEND_WELCOME_EMAIL       => array(
+			self::SEND_WELCOME_EMAIL                => array(
 				'name'  => self::SEND_WELCOME_EMAIL,
 				'type'  => 'toggle',
 				'group' => 'advanced',
 				'label' => esc_html__( 'Send a welcome email to new subscribers ', 'ninja-forms' ),
 				'width' => 'full',
 			),
-			'welcoming_learn_more'         => array(
+			'welcoming_learn_more'                  => array(
 				'name'           => 'welcoming_learn_more',
 				'type'           => 'html',
 				'group'          => 'advanced',
@@ -180,7 +180,7 @@ class OmnisendActionSettingsProvider {
 				'width'          => 'full',
 				'use_merge_tags' => true,
 			),
-			'field_mapping_block'          => array(
+			'field_mapping_block'                   => array(
 				'name'           => 'field_mapping_block',
 				'type'           => 'html',
 				'group'          => 'advanced',
@@ -189,7 +189,7 @@ class OmnisendActionSettingsProvider {
 				'width'          => 'full',
 				'use_merge_tags' => true,
 			),
-			'field_mapping_message'        => array(
+			'field_mapping_message'                 => array(
 				'name'           => 'field_mapping_message',
 				'type'           => 'html',
 				'group'          => 'advanced',
@@ -207,7 +207,7 @@ class OmnisendActionSettingsProvider {
 				'width'          => 'full',
 				'use_merge_tags' => true,
 			),
-			'field_mapping_having_trouble' => array(
+			'field_mapping_having_trouble'          => array(
 				'name'           => 'field_mapping_having_trouble',
 				'type'           => 'html',
 				'group'          => 'advanced',
