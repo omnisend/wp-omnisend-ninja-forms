@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: Omnisend for Ninja Forms Add-On
- * Description: A ninja forms add-on to sync contacts with Omnisend. In collaboration with Omnisnnd for WooCommerce plugin it enables better customer tracking
+ * Description: A ninja forms add-on to sync contacts with Omnisend. In collaboration with Omnisend for WooCommerce plugin it enables better customer tracking
  * Version: 1.0.0
  * Author: Omnisend
  * Author URI: https://www.omnisend.com

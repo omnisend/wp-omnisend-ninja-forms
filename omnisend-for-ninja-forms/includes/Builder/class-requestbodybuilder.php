@@ -28,6 +28,8 @@ class RequestBodyBuilder {
 		$phone_consent = 'nonSubscribed';
 
 		if ( ! isset( $_SERVER['REMOTE_ADDR'] ) && ! isset( $_SERVER['HTTP_USER_AGENT'] ) ) {
+			error_log( 'Unable to fetch REMOTE_ADDR and HTTP_USER_AGENT.' );
+
 			return array();
 		}
 

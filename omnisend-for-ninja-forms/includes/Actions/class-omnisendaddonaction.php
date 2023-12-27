@@ -130,6 +130,10 @@ class OmnisendAddOnAction extends NF_Abstracts_Action {
 	public function process( $action_settings, $form_id, $data ) {
 		$form_name = $data['settings']['title'];
 
+		if ( ! is_array( $action_settings ) || ! is_array( $data ) ) {
+			return;
+		}
+
 		/**
 		 * Response object for Omnisend.
 		 *

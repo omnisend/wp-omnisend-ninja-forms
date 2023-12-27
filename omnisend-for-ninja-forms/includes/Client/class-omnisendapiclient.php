@@ -21,7 +21,14 @@ class OmnisendApiClient {
 	 * @return mixed The response from the API.
 	 */
 	public function create_omnisend_contact( array $body ) {
-		$api_key  = get_option( 'omnisend_api_key', null );
+		$api_key = get_option( 'omnisend_api_key', null );
+
+		if ( empty( $api_key ) ) {
+			error_log( 'Omnisend API key is not configured.' );
+
+			return array();
+		}
+
 		$endpoint = 'https://api.omnisend.com/v3/contacts';
 
 		$data = array(

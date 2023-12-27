@@ -17,6 +17,8 @@ use Omnisend\NinjaFormsAddon\Provider\OmnisendActionSettingsProvider;
  */
 class FormFieldsMapper {
 
+	const NAME_REGEXP = '/[^A-Za-z0-9_]/';
+
 	/**
 	 * Get field mappings.
 	 *
@@ -58,7 +60,7 @@ class FormFieldsMapper {
 					continue;
 				}
 
-				if ( OmnisendAddOnAction::BIRTHDAY === $key ) {
+				if ( OmnisendAddOnAction::BIRTHDAY === $key && ! empty( form_field['value'] ) && strtotime( $form_field['value'] ) ) {
 					$values[ $key ] = gmdate( 'Y-m-d', strtotime( $form_field['value'] ) );
 					continue;
 				}
@@ -97,7 +99,7 @@ class FormFieldsMapper {
 			}
 
 			$safe_label = str_replace( ' ', '_', $field_label );
-			$safe_label = preg_replace( '/[^A-Za-z0-9_]/', '', $safe_label );
+			$safe_label = preg_replace( self::NAME_REGEXP, '', $safe_label );
 			$safe_label = strtolower( $safe_label );
 
 			if ( 'listcheckbox' !== $field['type'] ) {
