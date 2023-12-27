@@ -4,7 +4,7 @@
  * Description: A ninja forms add-on to sync contacts with Omnisend. In collaboration with Omnisend for WooCommerce plugin it enables better customer tracking
  * Version: 1.0.0
  * Author: Omnisend
- * Author URI: https://www.omnisend.com
+ * Author URI: https://omnisend.com
  * Developer: Omnisend
  * Developer URI: https://developers.omnisend.com
  * Text Domain: omnisend-for-ninja-forms-add-on
