@@ -36,15 +36,15 @@ class OmnisendActionSettingsProvider {
 	 * @return array The settings array.
 	 */
 	public function get_settings(): array {
-		if ( ! isset( $_GET['form_id'] ) || wp_verify_nonce( sanitize_text_field( wp_unslash( $_GET['form_id'] ) ) ) ) {
+		if ( ! isset( $_GET['form_id'] ) ) {
 			return array();
 		}
 
-		if ( ! isset( $_GET['page'] ) || wp_verify_nonce( sanitize_text_field( wp_unslash( $_GET['page'] ) ) ) ) {
+		if ( ! isset( $_GET['page'] ) ) {
 			return array();
 		}
 
-		if ( 'ninja-forms' !== $_GET['page'] && wp_verify_nonce( sanitize_text_field( wp_unslash( $_GET['form_id'] ) ) ) ) {
+		if ( 'ninja-forms' !== $_GET['page'] ) {
 			return array();
 		}
 
