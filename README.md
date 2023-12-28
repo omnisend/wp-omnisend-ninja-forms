@@ -1,1 +1,1 @@
-# wordpress-ninjaforms-plugin
+# Omnisend Add-on for Ninja Forms WordPress plugin
