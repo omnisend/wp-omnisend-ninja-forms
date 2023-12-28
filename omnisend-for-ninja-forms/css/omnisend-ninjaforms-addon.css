@@ -1,0 +1,73 @@
+.omnisend-ninja-forms-block-heading {
+	margin:0;
+	font-size: 1.1em;
+	color: #000;
+}
+
+.omnisend-ninja-forms-link {
+	color:#35938F;
+	position: relative;
+	font-size: 1.1em;
+}
+
+.omnisend-ninja-forms-link:after {
+	content: "";
+	width: 15px;
+	height: 15px;
+	background:url("../images/link.svg") no-repeat;
+	top: 3px;
+	background-size:cover;
+	right: -25px;
+	position: absolute;
+	display: inline-block;
+}
+
+.omnisend-ninja-forms-having-trouble {
+	background:#DBF1FF;
+	padding:30px;
+	border-radius: 13px;
+}
+
+.omnisend-ninja-forms-having-trouble-heading {
+	font-size: 1.1em;
+	padding-bottom: 25px;
+}
+
+.omnisend-ninja-forms-text {
+	font-size: 1.1em;
+	margin: 0;
+	color: #000;
+}
+
+.omnisend-ninja-forms-block-end {
+	margin-bottom: 45px;
+	padding-top: 5px;
+}
+
+.omnisend-ninja-forms-form-top {
+	margin-top:25px;
+}
+
+.omnisend-ninja-refresh-page-link-link {
+	color:#35938F;
+	position: relative;
+	font-size: 1.1em;
+	padding-left:26px;
+}
+
+.omnisend-ninja-refresh-page-link-link:before {
+	content: "";
+	width: 20px;
+	height: 20px;
+	background: url(../images/refresh.svg) no-repeat;
+	position: absolute;
+	display: inline-block;
+	background-size: cover;
+	left: 4px;
+	top: 2px;
+}
+
+.omnisend-ninja-forms-updated-fields-heading {
+	color: #000;
+	font-size: 1.1em;
+}
