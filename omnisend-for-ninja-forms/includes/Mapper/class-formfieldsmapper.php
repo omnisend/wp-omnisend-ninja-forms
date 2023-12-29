@@ -51,7 +51,7 @@ class FormFieldsMapper {
 				}
 
 				if ( in_array( $key, $consent_fields, true ) ) {
-					if ( '1' === $form_field['value'] ) {
+					if ( '1' == $form_field['value'] ) {
 						$values[ $key ] = 'subscribed';
 					} else {
 						$values[ $key ] = 'nonSubscribed';
@@ -60,7 +60,7 @@ class FormFieldsMapper {
 					continue;
 				}
 
-				if ( OmnisendAddOnAction::BIRTHDAY === $key && ! empty( form_field['value'] ) && strtotime( $form_field['value'] ) ) {
+				if ( OmnisendAddOnAction::BIRTHDAY === $key && ! empty( $form_field['value'] ) && strtotime( $form_field['value'] ) ) {
 					$values[ $key ] = gmdate( 'Y-m-d', strtotime( $form_field['value'] ) );
 					continue;
 				}

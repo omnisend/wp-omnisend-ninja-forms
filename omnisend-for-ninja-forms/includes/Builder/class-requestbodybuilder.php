@@ -15,6 +15,7 @@ use Omnisend\NinjaFormsAddon\Actions\OmnisendAddOnAction;
  * Class RequestBodyBuilder
  */
 class RequestBodyBuilder {
+	const FORM_NAME_REGEXP = '/[^A-Za-z0-9\-]/';
 
 	/**
 	 * Get the request body for Omnisend API.
@@ -24,6 +25,7 @@ class RequestBodyBuilder {
 	 * @return array The request body.
 	 */
 	public function get_body( array $mapped_fields, string $form_name ): array {
+		$form_name     = preg_replace( self::FORM_NAME_REGEXP, '', $form_name );
 		$email_consent = 'nonSubscribed';
 		$phone_consent = 'nonSubscribed';
 
@@ -34,7 +36,7 @@ class RequestBodyBuilder {
 		}
 
 		$consent_object = array(
-			'source'    => 'ninja-forms',
+			'source'    => 'ninja-forms-' . $form_name,
 			'createdAt' => gmdate( 'c' ),
 			'ip'        => sanitize_text_field( wp_unslash( $_SERVER['REMOTE_ADDR'] ) ),
 			'userAgent' => sanitize_text_field( wp_unslash( $_SERVER['HTTP_USER_AGENT'] ) ),
@@ -139,7 +141,6 @@ class RequestBodyBuilder {
 			$data['sendWelcomeEmail'] = $mapped_fields['sendWelcomeEmail'];
 		}
 
-		$form_name    = preg_replace( '/[^A-Za-z0-9\-]/', '', $form_name );
 		$data['tags'] = array( 'ninja_forms', 'ninja_forms ' . $form_name );
 
 		if ( ! empty( $mapped_fields['customFields'] ) ) {
