@@ -25,7 +25,7 @@ class RequestBodyBuilder {
 	 * @return array The request body.
 	 */
 	public function get_body( array $mapped_fields, string $form_name ): array {
-		$form_name    = preg_replace( '/[^A-Za-z0-9\-]/', '', $form_name );
+		$form_name     = preg_replace( self::FORM_NAME_REGEXP, '', $form_name );
 		$email_consent = 'nonSubscribed';
 		$phone_consent = 'nonSubscribed';
 
