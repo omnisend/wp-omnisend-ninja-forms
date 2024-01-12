@@ -34,7 +34,7 @@ Omnisend for Ninja Forms add-on requires you to install:
 == FAQ ==
 
 = Installation instructions =
-Read [Installation instructions](https://support.omnisend.com/en/articles/8617559-integration-with-ninja-forms)
+Read [Installation instructions](https://support.omnisend.com/en/articles/8775209-integration-with-ninja-forms)
 
 = What are the technical requirements for the plugin installation? =
 * PHP 7.1+
