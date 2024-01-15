@@ -6,6 +6,7 @@ jobs:
     name: Release new tag
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@main
       - name: WordPress Plugin Deploy
         uses: omnisend/action-wordpress-plugin-deploy@v1.0.3
         env:
