@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Install SVN
-        run: apt-get update && apt-get install -y subversion
+        run: sudo apt-get update && apt-get install -y subversion
       - uses: actions/checkout@main
       - name: WordPress Plugin Deploy
         uses: omnisend/action-wordpress-plugin-deploy@v1.0.3
