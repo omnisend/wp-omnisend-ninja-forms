@@ -5,7 +5,7 @@ on: [workflow_dispatch]
 jobs:
   svn:
     name: Release new tag
-    runs-on: [self-hosted, development]
+    runs-on: ubuntu-latest
     steps:
       - name: Install SVN
         run: apt-get update && apt-get install -y subversion
