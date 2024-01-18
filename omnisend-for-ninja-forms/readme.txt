@@ -64,3 +64,7 @@ Read Omnisend [Terms of Use](https://www.omnisend.com/terms)
 = 1.0.0 =
 
 * Initial release.
+
+= 1.0.3 =
+
+* Update link to Omnisend support article
