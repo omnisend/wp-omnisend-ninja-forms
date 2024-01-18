@@ -5,7 +5,7 @@ Tags: Ninja forms, form, email marketing, web tracking, subscriber collection
 Requires at least: 4.7.0
 Tested up to: 6.4
 Requires PHP: 7.1
-Stable tag: 1.0.0
+Stable tag: 1.0.3
 License: GPLv3 or later
 URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -64,3 +64,7 @@ Read Omnisend [Terms of Use](https://www.omnisend.com/terms)
 = 1.0.0 =
 
 * Initial release.
+
+= 1.0.3 =
+
+* Update link to Omnisend support article
