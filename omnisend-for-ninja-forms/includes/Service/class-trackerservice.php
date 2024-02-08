@@ -32,7 +32,7 @@ class TrackerService {
 			)
 		);
 
-		wp_enqueue_script( 'omnisend-snippet-script', $snippet_path, array(), '1.0.0', true );
+		wp_enqueue_script( 'omnisend-snippet-script', $snippet_path, array(), '1.0.4', true );
 		wp_localize_script( 'omnisend-snippet-script', 'omnisendIdentifiers', $identifiers );
 	}
 }
