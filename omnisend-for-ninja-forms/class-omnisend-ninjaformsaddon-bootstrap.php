@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Omnisend for Ninja Forms Add-On
  * Description: A ninja forms add-on to sync contacts with Omnisend. In collaboration with Omnisend for WooCommerce plugin it enables better customer tracking
- * Version: 1.0.0
+ * Version: 1.0.4
  * Author: Omnisend
  * Author URI: https://omnisend.com
  * Developer: Omnisend
@@ -21,7 +21,7 @@ use Omnisend\NinjaFormsAddon\Actions\OmnisendAddOnAction;
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
-define( 'OMNISEND_NINJA_ADDON_VERSION', '1.0.0' );
+define( 'OMNISEND_NINJA_ADDON_VERSION', '1.0.4' );
 
 add_action( 'ninja_forms_register_actions', array( 'Omnisend_NinjaFormsAddOn_Bootstrap', 'register_actions' ), 10 );
 spl_autoload_register( array( 'Omnisend_NinjaFormsAddOn_Bootstrap', 'autoloader' ) );
@@ -124,7 +124,7 @@ class Omnisend_NinjaFormsAddOn_Bootstrap {
 	 * Loading styles in admin.
 	 */
 	public static function load_custom_wp_admin_style() {
-		wp_register_style( 'omnisend-ninja-forms-addon', plugins_url( 'css/omnisend-ninjaforms-addon.css', __FILE__ ), array(), '1.0.0' );
+		wp_register_style( 'omnisend-ninja-forms-addon', plugins_url( 'css/omnisend-ninjaforms-addon.css', __FILE__ ), array(), '1.0.4' );
 		wp_enqueue_style( 'omnisend-ninja-forms-addon' );
 	}
 }
