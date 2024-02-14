@@ -5,7 +5,7 @@ Tags: Ninja forms, form, email marketing, web tracking, subscriber collection
 Requires at least: 4.7.0
 Tested up to: 6.4
 Requires PHP: 7.1
-Stable tag: 1.0.4
+Stable tag: 1.1.0
 License: GPLv3 or later
 URI: http://www.gnu.org/licenses/gpl-3.0.html
 
