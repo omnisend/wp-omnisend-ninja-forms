@@ -122,7 +122,7 @@ class Omnisend_NinjaFormsAddOn_Bootstrap {
 	 * Display a notice for the missing Omnisend WooCommerce plugin.
 	 */
 	public static function omnisend_woocommerce_notice() {
-		echo '<div class="error"><p>' . esc_html__( 'Plugin Omnisend for Ninja Forms Add-On is deactivated. Please install and activate ', 'ninja-forms' ) . '<a href="https://wordpress.org/plugins/omnisend/">' . esc_html__( 'Omnisend for Woocommerce plugin.', 'ninja-forms' ) . '</a></p></div>';
+		echo '<div class="error"><p>' . esc_html__( 'Plugin Omnisend for Ninja Forms Add-On is deactivated. Please install and activate ', 'ninja-forms' ) . '<a href="https://wordpress.org/plugins/omnisend/">' . esc_html__( 'Email Marketing by Omnisend.', 'ninja-forms' ) . '</a></p></div>';
 	}
 
 	/**
