@@ -10,6 +10,7 @@ declare(strict_types=1);
 namespace Omnisend\NinjaFormsAddon\Builder;
 
 use Omnisend\NinjaFormsAddon\Actions\OmnisendAddOnAction;
+use Omnisend\SDK\V1\Contact;
 
 /**
  * Class RequestBodyBuilder
@@ -22,25 +23,19 @@ class RequestBodyBuilder {
 	 *
 	 * @param array  $mapped_fields The mapped fields.
 	 * @param string $form_name     The form name.
-	 * @return array The request body.
+	 * @return Contact|null The request body.
 	 */
-	public function get_body( array $mapped_fields, string $form_name ): array {
+	public function get_body( array $mapped_fields, string $form_name ): ?Contact {
 		$form_name     = preg_replace( self::FORM_NAME_REGEXP, '', $form_name );
 		$email_consent = 'nonSubscribed';
 		$phone_consent = 'nonSubscribed';
+		$contact       = new Contact();
 
 		if ( ! isset( $_SERVER['REMOTE_ADDR'] ) && ! isset( $_SERVER['HTTP_USER_AGENT'] ) ) {
 			error_log( 'Unable to fetch REMOTE_ADDR and HTTP_USER_AGENT.' );
 
-			return array();
+			return null;
 		}
-
-		$consent_object = array(
-			'source'    => 'ninja-forms-' . $form_name,
-			'createdAt' => gmdate( 'c' ),
-			'ip'        => sanitize_text_field( wp_unslash( $_SERVER['REMOTE_ADDR'] ) ),
-			'userAgent' => sanitize_text_field( wp_unslash( $_SERVER['HTTP_USER_AGENT'] ) ),
-		);
 
 		$fields_to_process = array(
 			OmnisendAddOnAction::EMAIL,
@@ -82,44 +77,24 @@ class RequestBodyBuilder {
 			return array();
 		}
 
-		$identifiers = array();
-		if ( '' !== $email ) {
-			$email_identifier = array(
-				'type'     => 'email',
-				'channels' => array(
-					'email' => array(
-						'status'     => $email_consent,
-						'statusDate' => gmdate( 'c' ),
-					),
-				),
-				'id'       => $email,
-			);
+		if ( '' === $email ) {
+			return null;
+		}
 
-			if ( 'subscribed' === $email_consent ) {
-				$email_identifier['consent'] = $consent_object;
-			}
-			array_push( $identifiers, $email_identifier );
+		$contact->set_email( $email );
+		if ( 'subscribed' === $email_consent ) {
+			$contact->set_email_consent( 'ninja-forms-' . $form_name );
+			$contact->set_email_opt_in( 'ninja-forms-' . $form_name );
 		}
 
 		if ( '' !== $phone_number ) {
-			$phone_identifier = array(
-				'type'     => 'phone',
-				'channels' => array(
-					'sms' => array(
-						'status'     => $phone_consent,
-						'statusDate' => gmdate( 'c' ),
-					),
-				),
-				'id'       => $phone_number,
-			);
+			$contact->set_phone( $phone_number );
 			if ( 'subscribed' === $phone_consent ) {
-				$phone_identifier['consent'] = $consent_object;
+				$contact->set_phone_consent( 'ninja-forms-' . $form_name );
+				$contact->set_phone_opt_in( 'ninja-forms-' . $form_name );
 			}
-
-			array_push( $identifiers, $phone_identifier );
 		}
 
-		$data                = array( 'identifiers' => $identifiers );
 		$fields_to_data_keys = array(
 			'first_name'  => 'firstName',
 			'last_name'   => 'lastName',
@@ -133,20 +108,22 @@ class RequestBodyBuilder {
 
 		foreach ( $fields_to_data_keys as $variable => $data_key ) {
 			if ( ! empty( $$variable ) ) {
-				$data[ $data_key ] = $$variable;
+				$method = 'set_' . $variable;
+				$contact->$method( $$variable );
 			}
 		}
 
 		if ( isset( $mapped_fields['sendWelcomeEmail'] ) ) {
-			$data['sendWelcomeEmail'] = $mapped_fields['sendWelcomeEmail'];
+			$contact->set_welcome_email( $mapped_fields['sendWelcomeEmail'] );
 		}
 
-		$data['tags'] = array( 'ninja_forms', 'ninja_forms ' . $form_name );
+		$contact->add_tag( 'ninja_forms' );
+		$contact->add_tag( 'ninja_forms ' . $form_name );
 
-		if ( ! empty( $mapped_fields['customFields'] ) ) {
-			$data['customProperties'] = (object) $mapped_fields['customFields'];
+		foreach ( $mapped_fields['customFields'] as $field_name => $field_value ) {
+			$contact->add_custom_property( $field_name, $field_value );
 		}
 
-		return $data;
+		return $contact;
 	}
 }

@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Omnisend for Ninja Forms Add-On
  * Description: A ninja forms add-on to sync contacts with Omnisend. In collaboration with Omnisend for WooCommerce plugin it enables better customer tracking
- * Version: 1.0.4
+ * Version: 1.1.0
  * Author: Omnisend
  * Author URI: https://omnisend.com
  * Developer: Omnisend
@@ -21,7 +21,9 @@ use Omnisend\NinjaFormsAddon\Actions\OmnisendAddOnAction;
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
-define( 'OMNISEND_NINJA_ADDON_VERSION', '1.0.4' );
+
+const OMNISEND_NINJA_ADDON_NAME    = 'Omnisend for NINJA Forms Add-On';
+const OMNISEND_NINJA_ADDON_VERSION = '1.1.0';
 
 add_action( 'ninja_forms_register_actions', array( 'Omnisend_NinjaFormsAddOn_Bootstrap', 'register_actions' ), 10 );
 spl_autoload_register( array( 'Omnisend_NinjaFormsAddOn_Bootstrap', 'autoloader' ) );
@@ -40,6 +42,10 @@ class Omnisend_NinjaFormsAddOn_Bootstrap {
 	 * @return array The modified array of actions.
 	 */
 	public static function register_actions( $actions ) {
+		if ( ! class_exists( 'Omnisend\SDK\V1\Omnisend' ) ) {
+			return array();
+		}
+
 		$path_to_snippet     = plugins_url( '/js/snippet.js', __FILE__ );
 		$actions['omnisend'] = new OmnisendAddOnAction( $path_to_snippet );
 
@@ -75,18 +81,24 @@ class Omnisend_NinjaFormsAddOn_Bootstrap {
 	 */
 	public static function check_plugin_requirements() {
 		require_once ABSPATH . '/wp-admin/includes/plugin.php';
-		$omnisend_plugin = 'omnisend-connect/omnisend-woocommerce.php';
+		$omnisend_plugin = 'omnisend/class-omnisend-core-bootstrap.php';
 
 		if ( ! file_exists( WP_PLUGIN_DIR . '/' . $omnisend_plugin ) || ! is_plugin_active( $omnisend_plugin ) ) {
-			deactivate_plugins( 'omnisend-for-ninja-forms-add-on/class-omnisend-ninja-forms-addon-bootstrap.php' );
+			deactivate_plugins( 'omnisend-for-ninja-forms-add-on/class-omnisend-ninjaformsaddon-bootstrap.php' );
 			add_action( 'admin_notices', array( 'Omnisend_NinjaFormsAddOn_Bootstrap', 'omnisend_woocommerce_notice' ) );
 
 			return;
 		}
 
-		$api_key = get_option( 'omnisend_api_key', null );
-		if ( is_null( $api_key ) ) {
-			deactivate_plugins( 'omnisend-for-ninja-forms-add-on/class-omnisend-ninja-forms-addon-bootstrap.php' );
+		if ( ! class_exists( 'Omnisend\SDK\V1\Omnisend' ) ) {
+			deactivate_plugins( 'omnisend-for-ninja-forms-add-on/class-omnisend-ninjaformsaddon-bootstrap.php' );
+			add_action( 'admin_notices', array( 'Omnisend_NinjaFormsAddOn_Bootstrap', 'omnisend_woocommerce_not_up_to_date' ) );
+
+			return;
+		}
+
+		if ( ! Omnisend\SDK\V1\Omnisend::is_connected() ) {
+			deactivate_plugins( 'omnisend-for-ninja-forms-add-on/class-omnisend-ninjaformsaddon-bootstrap.php' );
 			add_action( 'admin_notices', array( 'Omnisend_NinjaFormsAddOn_Bootstrap', 'omnisend_woocommerce_api_key_notice' ) );
 
 			return;
@@ -94,7 +106,7 @@ class Omnisend_NinjaFormsAddOn_Bootstrap {
 
 		$ninja_forms_plugin = 'ninja-forms/ninja-forms.php';
 		if ( ! file_exists( WP_PLUGIN_DIR . '/' . $ninja_forms_plugin ) || ! is_plugin_active( 'ninja-forms/ninja-forms.php' ) ) {
-			deactivate_plugins( 'omnisend-for-ninja-forms-add-on/class-omnisend-ninja-forms-addon-bootstrap.php' );
+			deactivate_plugins( 'omnisend-for-ninja-forms-add-on/class-omnisend-ninjaformsaddon-bootstrap.php' );
 			add_action( 'admin_notices', array( 'Omnisend_NinjaFormsAddOn_Bootstrap', 'ninja_forms_notice' ) );
 		}
 	}
@@ -110,7 +122,14 @@ class Omnisend_NinjaFormsAddOn_Bootstrap {
 	 * Display a notice for the missing Omnisend WooCommerce plugin.
 	 */
 	public static function omnisend_woocommerce_notice() {
-		echo '<div class="error"><p>' . esc_html__( 'Plugin Omnisend for Ninja Forms Add-On is deactivated. Please install and activate ', 'ninja-forms' ) . '<a href="https://wordpress.org/plugins/omnisend-connect/">' . esc_html__( 'Omnisend for Woocommerce plugin.', 'ninja-forms' ) . '</a></p></div>';
+		echo '<div class="error"><p>' . esc_html__( 'Plugin Omnisend for Ninja Forms Add-On is deactivated. Please install and activate ', 'ninja-forms' ) . '<a href="https://wordpress.org/plugins/omnisend/">' . esc_html__( 'Email Marketing by Omnisend.', 'ninja-forms' ) . '</a></p></div>';
+	}
+
+	/**
+	 * Display a notice for not up to date omnisend plugin.
+	 */
+	public static function omnisend_woocommerce_not_up_to_date() {
+		echo '<div class="error"><p>' . esc_html__( 'Your Email Marketing by Omnisend is not up to date. Please update plugins ', 'ninja-forms' ) . '<a href="https://wordpress.org/plugins/omnisend/">' . esc_html__( 'Omnisend for Woocommerce plugin.', 'ninja-forms' ) . '</a></p></div>';
 	}
 
 	/**
