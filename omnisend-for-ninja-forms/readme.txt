@@ -47,7 +47,7 @@ Every Omnisend customer gets our award-winning support, 24/7—even on the free 
 Read Omnisend [Terms of Use](https://www.omnisend.com/terms)
 
 = How can I report security bugs?
-You can report security bugs through the Patchstack Vulnerability Disclosure Program. The Patchstack team help validate, triage and handle any security vulnerabilities. [Report a security vulnerability.](https://patchstack.com/database/vdp/omnisend-for-formidable-forms-add-on)
+You can report security bugs through the Patchstack Vulnerability Disclosure Program. The Patchstack team help validate, triage and handle any security vulnerabilities. [Report a security vulnerability.](https://patchstack.com/database/vdp/omnisend-for-ninja-forms-add-on)
 
 == Screenshots ==
 
