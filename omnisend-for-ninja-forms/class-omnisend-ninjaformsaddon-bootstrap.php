@@ -6,7 +6,7 @@
  * Author: Omnisend
  * Author URI: https://omnisend.com
  * Developer: Omnisend
- * Developer URI: https://developers.omnisend.com
+ * Developer URI: https://omnisend.com
  * Text Domain: omnisend-for-ninja-forms-add-on
  * ------------------------------------------------------------------------
  * Copyright 2023 Omnisend
