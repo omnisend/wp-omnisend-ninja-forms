@@ -110,7 +110,7 @@ class OmnisendAddOnAction extends NF_Abstracts_Action {
 	public function __construct( $snippet_path ) {
 		parent::__construct();
 
-		$this->_nicename        = esc_html__( 'Omnisend', 'ninja-forms' );
+		$this->_nicename        = esc_html__( 'Omnisend', 'omnisend-for-ninja-forms' );
 		$settings_provider      = new OmnisendActionSettingsProvider();
 		$this->_settings        = array_merge( $this->_settings, $settings_provider->get_settings() );
 		$this->omnisend_service = new OmnisendApiService();
