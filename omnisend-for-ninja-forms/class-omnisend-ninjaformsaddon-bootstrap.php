@@ -23,7 +23,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 const OMNISEND_NINJA_ADDON_NAME    = 'Omnisend for NINJA Forms Add-On';
-const OMNISEND_NINJA_ADDON_VERSION = '6';
+const OMNISEND_NINJA_ADDON_VERSION = '1.1.6';
 
 add_action( 'ninja_forms_register_actions', array( 'Omnisend_NinjaFormsAddOn_Bootstrap', 'register_actions' ), 10 );
 spl_autoload_register( array( 'Omnisend_NinjaFormsAddOn_Bootstrap', 'autoloader' ) );
