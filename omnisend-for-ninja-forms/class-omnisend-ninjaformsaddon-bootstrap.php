@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Omnisend for Ninja Forms Add-On
  * Description: A ninja forms add-on to sync contacts with Omnisend. In collaboration with Omnisend for WooCommerce plugin it enables better customer tracking
- * Version: 1.1.8
+ * Version: 1.2.0
  * Requires PHP: 7.4
  * Author: Omnisend
  * Author URI: https://omnisend.com
@@ -24,12 +24,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 const OMNISEND_NINJA_ADDON_NAME    = 'Omnisend for NINJA Forms Add-On';
-const OMNISEND_NINJA_ADDON_VERSION = '1.1.8';
+const OMNISEND_NINJA_ADDON_VERSION = '1.2.0';
 
 add_action( 'ninja_forms_register_actions', array( 'Omnisend_NinjaFormsAddOn_Bootstrap', 'register_actions' ), 10 );
 spl_autoload_register( array( 'Omnisend_NinjaFormsAddOn_Bootstrap', 'autoloader' ) );
 add_action( 'plugins_loaded', array( 'Omnisend_NinjaFormsAddOn_Bootstrap', 'check_plugin_requirements' ) );
 add_action( 'admin_enqueue_scripts', array( 'Omnisend_NinjaFormsAddOn_Bootstrap', 'load_custom_wp_admin_style' ) );
+add_action( 'admin_init', array( 'Omnisend_NinjaFormsAddOn_Bootstrap', 'add_privacy_policy_content' ) );
 
 /**
  * Class Omnisend_NinjaFormsAddOn_Bootstrap
@@ -51,6 +52,29 @@ class Omnisend_NinjaFormsAddOn_Bootstrap {
 		$actions['omnisend'] = new OmnisendAddOnAction( $path_to_snippet );
 
 		return $actions;
+	}
+
+	/**
+	 * Suggests privacy policy text for site administrators, as recommended by the
+	 * WordPress privacy policy content API for plugins that collect user data.
+	 */
+	public static function add_privacy_policy_content() {
+		if ( ! function_exists( 'wp_add_privacy_policy_content' ) ) {
+			return;
+		}
+
+		$content =
+			'<p>' . esc_html__( 'When you submit a Ninja Forms form on this site, the Omnisend for Ninja Forms Add-On sends the personal data you provide to Omnisend for email and SMS marketing purposes. Depending on how the form is configured, this may include your email address, phone number, first and last name, birthday, address, city, state, country, postal code, your consent choices, and any other form fields you fill in.', 'omnisend-for-ninja-forms' ) . '</p>' .
+			'<p>' . esc_html__( 'This data is transmitted to and stored by Omnisend, a third-party service, and is retained there according to Omnisend’s data retention practices for as long as your contact record exists. The plugin itself does not store this data separately in your WordPress database beyond the standard Ninja Forms submissions.', 'omnisend-for-ninja-forms' ) . '</p>' .
+			'<p>' . esc_html__( 'To enable web tracking, the add-on may load an Omnisend tracking snippet that identifies you by your submitted email address or phone number and sets cookies in your browser to track your activity on the site.', 'omnisend-for-ninja-forms' ) . '</p>' .
+			'<p>' . sprintf(
+				/* translators: 1: Omnisend Privacy Policy URL, 2: Omnisend Terms of Use URL */
+				esc_html__( 'You have the right to request access to, export of, or deletion of your personal data. For details on how Omnisend processes personal data and how to exercise these rights, see Omnisend’s Privacy Policy at %1$s and Terms of Use at %2$s.', 'omnisend-for-ninja-forms' ),
+				'<a href="https://www.omnisend.com/privacy/" target="_blank">https://www.omnisend.com/privacy/</a>',
+				'<a href="https://www.omnisend.com/terms" target="_blank">https://www.omnisend.com/terms</a>'
+			) . '</p>';
+
+		wp_add_privacy_policy_content( OMNISEND_NINJA_ADDON_NAME, wp_kses_post( $content ) );
 	}
 
 	/**
