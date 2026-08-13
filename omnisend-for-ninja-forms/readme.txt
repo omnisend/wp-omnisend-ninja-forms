@@ -3,9 +3,9 @@ Plugin Name: Omnisend for Ninja Forms Add-On
 Contributors: Omnisend
 Tags: Ninja forms, form, email marketing, web tracking, subscriber collection
 Requires at least: 4.7.0
-Tested up to: 7.0
+Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.2.0
+Stable tag: 1.2.1
 License: GPLv3 or later
 URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -60,6 +60,9 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 7. Convert more visitors with highly-targeted landing pages
 
 == Changelog ==
+
+= 1.2.1 =
+* Confirmed compatibility with WordPress 7.1.
 
 = 1.2.0 =
 * Suggest privacy policy text via the WordPress privacy policy content API.
