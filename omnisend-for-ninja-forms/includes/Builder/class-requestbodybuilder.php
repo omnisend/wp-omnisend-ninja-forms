@@ -95,18 +95,18 @@ class RequestBodyBuilder {
 			}
 		}
 
-		$fields_to_data_keys = array(
-			'first_name'  => 'firstName',
-			'last_name'   => 'lastName',
-			'birthday'    => 'birthdate',
-			'postal_code' => 'postalCode',
-			'address'     => 'address',
-			'state'       => 'state',
-			'country'     => 'country',
-			'city'        => 'city',
+		$optional_fields = array(
+			'first_name',
+			'last_name',
+			'birthday',
+			'postal_code',
+			'address',
+			'state',
+			'country',
+			'city',
 		);
 
-		foreach ( $fields_to_data_keys as $variable => $data_key ) {
+		foreach ( $optional_fields as $variable ) {
 			if ( ! empty( $$variable ) ) {
 				$method = 'set_' . $variable;
 				$contact->$method( $$variable );
