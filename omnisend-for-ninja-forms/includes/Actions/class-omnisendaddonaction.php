@@ -10,8 +10,6 @@ declare(strict_types=1);
 namespace Omnisend\NinjaFormsAddon\Actions;
 
 use NF_Abstracts_Action;
-use Omnisend\NinjaFormsAddon\Builder\RequestBodyBuilder;
-use Omnisend\NinjaFormsAddon\Mapper\FormFieldsMapper;
 use Omnisend\NinjaFormsAddon\OmnisendResponse;
 use Omnisend\NinjaFormsAddon\Provider\OmnisendActionSettingsProvider;
 use Omnisend\NinjaFormsAddon\Service\OmnisendApiService;
